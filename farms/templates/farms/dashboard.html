@@ -1,0 +1,91 @@
+{% extends "farms/base.html" %}
+
+{% block title %}Dashboard - Farm Management{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Farm Dashboard</h1>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Farms</h3>
+            <p class="stat-value" id="totalFarms">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Crops</h3>
+            <p class="stat-value" id="totalCrops">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Livestock</h3>
+            <p class="stat-value" id="totalLivestock">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Active Projects</h3>
+            <p class="stat-value" id="activeProjects">0</p>
+        </div>
+    </div>
+
+    <div class="charts-grid">
+        <div class="chart-container">
+            <h2>Crops by Status</h2>
+            <canvas id="cropsChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>Livestock by Type</h2>
+            <canvas id="livestockChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>Projects by Status</h2>
+            <canvas id="projectsChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>Population Trends</h2>
+            <canvas id="populationChart"></canvas>
+        </div>
+    </div>
+
+    <div class="farms-section">
+        <h2>My Farms</h2>
+        <button class="btn btn-primary" onclick="showAddFarmModal()">Add New Farm</button>
+        <div id="farmsList" class="farms-list"></div>
+    </div>
+</div>
+
+<!-- Add Farm Modal -->
+<div id="addFarmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddFarmModal()">&times;</span>
+        <h2>Add New Farm</h2>
+        <form id="addFarmForm">
+            <div class="form-group">
+                <label for="farmName">Farm Name:</label>
+                <input type="text" id="farmName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="farmLocation">Location:</label>
+                <input type="text" id="farmLocation" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="farmSize">Size (hectares):</label>
+                <input type="number" step="0.01" id="farmSize" name="size_hectares" required>
+            </div>
+            <div class="form-group">
+                <label for="farmCategory">Category:</label>
+                <select id="farmCategory" name="category" required>
+                    <option value="crops">Crops</option>
+                    <option value="livestock">Livestock</option>
+                    <option value="poultry">Poultry</option>
+                    <option value="aquaculture">Aquaculture</option>
+                    <option value="horticulture">Horticulture</option>
+                    <option value="mixed">Mixed Farming</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Farm</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

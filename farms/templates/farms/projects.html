@@ -1,0 +1,96 @@
+{% extends "farms/base.html" %}
+
+{% block title %}Farm Projects - Kanban Board{% endblock %}
+
+{% block content %}
+<div class="projects-page">
+    <h1>Farm Projects - Kanban Board</h1>
+    
+    <div class="toolbar">
+        <select id="farmFilter" class="filter-select">
+            <option value="">All Farms</option>
+        </select>
+        <button class="btn btn-primary" onclick="showAddProjectModal()">Add New Project</button>
+    </div>
+
+    <div class="kanban-board">
+        <div class="kanban-column" data-status="todo">
+            <div class="kanban-header">
+                <h2>To Do</h2>
+                <span class="task-count" id="todoCount">0</span>
+            </div>
+            <div class="kanban-tasks" id="todoTasks" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+
+        <div class="kanban-column" data-status="in_progress">
+            <div class="kanban-header">
+                <h2>In Progress</h2>
+                <span class="task-count" id="inProgressCount">0</span>
+            </div>
+            <div class="kanban-tasks" id="inProgressTasks" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+
+        <div class="kanban-column" data-status="done">
+            <div class="kanban-header">
+                <h2>Done</h2>
+                <span class="task-count" id="doneCount">0</span>
+            </div>
+            <div class="kanban-tasks" id="doneTasks" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Project Modal -->
+<div id="addProjectModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddProjectModal()">&times;</span>
+        <h2>Add New Project</h2>
+        <form id="addProjectForm">
+            <div class="form-group">
+                <label for="projectFarm">Farm:</label>
+                <select id="projectFarm" name="farm" required></select>
+            </div>
+            <div class="form-group">
+                <label for="projectTitle">Title:</label>
+                <input type="text" id="projectTitle" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="projectDescription">Description:</label>
+                <textarea id="projectDescription" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="projectCategory">Category:</label>
+                <select id="projectCategory" name="category" required>
+                    <option value="crops">Crops</option>
+                    <option value="livestock">Livestock</option>
+                    <option value="poultry">Poultry</option>
+                    <option value="aquaculture">Aquaculture</option>
+                    <option value="horticulture">Horticulture</option>
+                    <option value="mixed">Mixed Farming</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="projectPriority">Priority:</label>
+                <select id="projectPriority" name="priority" required>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="budget">Budget:</label>
+                <input type="number" step="0.01" id="budget" name="budget">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Project</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/projects.js"></script>
+{% endblock %}
