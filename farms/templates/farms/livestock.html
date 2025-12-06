@@ -1,0 +1,87 @@
+{% extends "farms/base.html" %}
+
+{% block title %}Livestock Management{% endblock %}
+
+{% block content %}
+<div class="livestock-page">
+    <h1>Livestock Management</h1>
+    
+    <div class="toolbar">
+        <select id="farmFilter" class="filter-select">
+            <option value="">All Farms</option>
+        </select>
+        <button class="btn btn-primary" onclick="showAddLivestockModal()">Add New Livestock</button>
+    </div>
+
+    <div id="livestockTable" class="data-table"></div>
+</div>
+
+<!-- Add Livestock Modal -->
+<div id="addLivestockModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddLivestockModal()">&times;</span>
+        <h2>Add New Livestock</h2>
+        <form id="addLivestockForm">
+            <div class="form-group">
+                <label for="livestockFarm">Farm:</label>
+                <select id="livestockFarm" name="farm" required></select>
+            </div>
+            <div class="form-group">
+                <label for="animalType">Animal Type:</label>
+                <input type="text" id="animalType" name="animal_type" placeholder="e.g., Goats, Cattle, Sheep" required>
+            </div>
+            <div class="form-group">
+                <label for="breed">Breed:</label>
+                <input type="text" id="breed" name="breed">
+            </div>
+            <div class="form-group">
+                <label for="tagNumber">Tag Number:</label>
+                <input type="text" id="tagNumber" name="tag_number" required>
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Birth Date:</label>
+                <input type="date" id="birthDate" name="birth_date">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" step="0.01" id="weight" name="weight_kg">
+            </div>
+            <div class="form-group">
+                <label for="healthStatus">Health Status:</label>
+                <select id="healthStatus" name="health_status" required>
+                    <option value="healthy">Healthy</option>
+                    <option value="sick">Sick</option>
+                    <option value="quarantine">Quarantine</option>
+                    <option value="deceased">Deceased</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="purpose">Purpose:</label>
+                <select id="purpose" name="purpose">
+                    <option value="">Select Purpose</option>
+                    <option value="meat">Meat Production</option>
+                    <option value="dairy">Dairy Production</option>
+                    <option value="breeding">Breeding</option>
+                    <option value="sale">For Sale</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="livestockNotes">Notes:</label>
+                <textarea id="livestockNotes" name="notes"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Livestock</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/static/js/livestock.js"></script>
+{% endblock %}
